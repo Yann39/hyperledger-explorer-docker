@@ -1,4 +1,4 @@
-# Windows 10 64 bits Hyperledger Explorer full setup
+# Windows 10 64 bits Hyperledger Explorer setup
 
 ![Hyperledger Explorer logo](hyperledger-explorer-logo.png?raw=true "Hyperledger Explorer")
 
