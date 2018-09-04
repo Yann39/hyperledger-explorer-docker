@@ -1,0 +1,58 @@
+{
+	"network-config": {
+		"org1": {
+			"name": "MyOrg1",
+			"mspid": "MyOrg1MSP",
+			"peer1": {
+				"requests": "grpcs://peer0.myorg1.ch:7051",
+				"events": "grpcs://peer0.myorg1.ch:7053",
+				"server-hostname": "peer0.myorg1.ch",
+				"tls_cacerts": "/tmp/crypto/peerOrganizations/myorg1.ch/peers/peer0.myorg1.ch/tls/ca.crt"
+			},
+			"peer2": {
+				"requests": "grpcs://peer1.myorg1.ch:8051",
+				"events": "grpcs://peer1.myorg1.ch:8053",
+				"server-hostname": "peer1.myorg1.ch",
+				"tls_cacerts": "/tmp/crypto/peerOrganizations/myorg1.ch/peers/peer1.myorg1.ch/tls/ca.crt"
+			},
+			"admin": {
+				"key": "/tmp/crypto/peerOrganizations/myorg1.ch/users/Admin@myorg1.ch/msp/keystore",
+				"cert": "/tmp/crypto/peerOrganizations/myorg1.ch/users/Admin@myorg1.ch/msp/signcerts"
+			}
+		},
+		"org2": {
+			"name": "MyOrg2",
+			"mspid": "MyOrg2MSP",
+			"peer1": {
+				"requests": "grpcs://peer0.myorg2.ch:9051",
+				"events": "grpcs://peer0.myorg2.ch:9053",
+				"server-hostname": "peer0.myorg2.ch",
+				"tls_cacerts": "/tmp/crypto/peerOrganizations/myorg2.ch/peers/peer0.myorg2.ch/tls/ca.crt"
+			},
+			"peer2": {
+				"requests": "grpcs://peer1.myorg2.ch:10051",
+				"events": "grpcs://peer1.myorg2.ch:10053",
+				"server-hostname": "peer1.myorg2.ch",
+				"tls_cacerts": "/tmp/crypto/peerOrganizations/myorg2.ch/peers/peer1.myorg2.ch/tls/ca.crt"
+			},
+			"admin": {
+				"key": "/tmp/crypto/peerOrganizations/myorg2.ch/users/Admin@myorg2.ch/msp/keystore",
+				"cert": "/tmp/crypto/peerOrganizations/myorg2.ch/users/Admin@myorg2.ch/msp/signcerts"
+			}
+		}
+	},
+	"channel": "my-channel",
+	"orderers": [{
+		"mspid": "OrdererMSP",
+		"server-hostname": "orderer.myorg1.ch",
+		"requests": "grpcs://orderer.myorg1.ch:7050",
+		"tls_cacerts": "/tmp/crypto/ordererOrganizations/myorg1.ch/orderers/orderer.myorg1.ch/tls/ca.crt"
+	}],
+	"keyValueStore": "/tmp/fabric-client-kvs",
+	"configtxgenToolPath": "fabric-path/fabric-samples/bin",
+	"SYNC_START_DATE_FORMAT": "YYYY/MM/DD",
+	"syncStartDate": "2018/01/01",
+	"eventWaitTime": "30000",
+	"license": "Apache-2.0",
+	"version": "1.1"
+}

@@ -1,0 +1,40 @@
+version: '3.5'
+
+networks:
+  config_mynw:
+    external: true
+
+services:
+
+  explorer:
+    image: hyperledger_explorer_app
+    container_name: hyperledger_explorer_app
+    build:
+      context: ./app
+    expose:
+      - "8092"
+    links:
+      - postgresql
+    command: sh -c "/tmp/wait.sh && node /opt/explorer/main.js"
+    volumes:
+      - ./app/config/config.json:/opt/explorer/app/platform/fabric/config.json
+      - ./app/config/crypto-config://tmp/crypto
+    ports:
+      - "8092:8080"
+    networks:
+      - config_mynw
+
+  postgresql:
+    image: hyperledger_explorer_postgresql
+    container_name: hyperledger_explorer_postgresql
+    build:
+      context: ./postgresql
+    volumes:
+      - hyperledger_explorer_postgresql_data:/usr/local/pgsql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - config_mynw
+
+volumes:
+  hyperledger_explorer_postgresql_data:

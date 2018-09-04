@@ -1,0 +1,30 @@
+# Author: Yann39 <rockyracer@mailfence.com>
+# Date: June 2018
+
+# Definition of organizations managing orderer nodes
+OrdererOrgs:
+  - Name: Orderer
+    Domain: myorg1.ch
+    CA:
+      Country: CH
+      Province: Vaud
+      Locality: Lausanne
+    Specs:
+      - Hostname: orderer
+
+# Definition of organizations managing peer nodes
+PeerOrgs:
+  - Name: MyOrg1
+    Domain: myorg1.ch
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+    Users:
+      Count: 1
+  - Name: MyOrg2
+    Domain: myorg2.ch
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+    Users:
+      Count: 1
