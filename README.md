@@ -69,7 +69,7 @@ rm -rf app/config/crypto-config/
 
 ## The network
 
-The Hyperledger network in which I ran this example is composed of :
+The **Hyperledger network** in which I ran this example is composed of :
 - 2 organizations :
   * myorg1
   * myorg2
@@ -86,15 +86,17 @@ The Hyperledger network in which I ran this example is composed of :
 
 See _app/config/configtx.yaml_ and _app/config/crypto-config.yaml_ for example configuration and [Hyperledger Fabric documentation](https://hyperledger-fabric.readthedocs.io/en/release-1.2/) for the setup.
 
-## Custom Docker setup
+## Usage
 
-I have build a custom setup, that I think is simpler than the proposed steps which consist of downloading the whole repository and then modify the files (as mentioned in the _readme_ file).
+I have build a **custom setup**, that I think is simpler than the mentioned steps (from the [official repository](https://github.com/hyperledger/blockchain-explorer) _readme_ file) which consist of downloading the whole repository and then modify the files.
 
 Instead of downloading the repository locally and doing the modification in the sources,
-I get the repository directly into a Docker container and then link local configuration files to it using volumes.
+I get the repository directly into a **Docker** container and then link local configuration files to it using volumes.
 
 I have implemented a **Compose** file (_docker-compose.yaml_) that builds the images/containers for the application and the database.
 The containers will be attached to the existing Docker network of our Fabric network.
+
+:warning: Make sure you use the same Docker network as your existing Hyperledger Fabric network in the _docker-compose.yaml_ file. Mine is `config_mynw`.
 
 The Application will attach to the database once it is ready (I used a `wait.sh` script to wait for the database to be up).
 
@@ -102,7 +104,7 @@ So all that you need is in the _config_ directory :
 1. _config.json_ : file representing the network configuration
 2. _crypto-config_ : folder containing the network certificates
 
-You can regenerate the crypto materials from the _app/config/configtx.yaml_ and _app/config/crypto-config.yaml_ files.
+You can regenerate the cryptographic materials from the _app/config/configtx.yaml_ and _app/config/crypto-config.yaml_ files if needed.
 
 Then simply run :
 
@@ -116,11 +118,11 @@ This will run 2 containers :
 
 You should be able to reach http://localhost:8092
 
-For Swagger API endpoint, go to http://localhost:8092/api-docs/
+For **Swagger** API endpoint, go to http://localhost:8092/api-docs/
 
 ## PostGreSQL database
 
-If you need to enter the PostGreSQL database manually, here are some useful commands :
+If you need to enter the **PostGreSQL** database manually, here are some useful commands :
 
 Get into the container :
 
