@@ -11,6 +11,8 @@ services:
     container_name: hyperledger_explorer_app
     build:
       context: ./app
+      args:
+         EXPLORER_BRANCH: 'release-3.5'
     expose:
       - "8092"
     links:
@@ -29,6 +31,8 @@ services:
     container_name: hyperledger_explorer_postgresql
     build:
       context: ./postgresql
+      args:
+         EXPLORER_BRANCH: 'release-3.5'
     volumes:
       - hyperledger_explorer_postgresql_data:/usr/local/pgsql/data
     ports:

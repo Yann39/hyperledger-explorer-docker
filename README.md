@@ -41,27 +41,33 @@ git config --global core.longpaths true
 
 In case you already set up the environment, here are some useful cleanup commands
 
-1. Clean all containers containing "blockchain-explorer" in their name
+1. Clean containers and volumes
+
+```bash
+docker-compose down
+```
+
+2. Clean all containers containing "blockchain-explorer" in their name
 
 ```bash
 docker stop $(docker ps -a --filter="name=blockchain-explorer")
 docker rm $(docker ps -a --filter="name=blockchain-explorer")
 ```
 
-2. Clean all images with name starting with "hyperledger-blockchain-explorer" or "dev-peer"
+3. Clean all images with name starting with "hyperledger-blockchain-explorer" or "dev-peer"
 
 ```bash
 docker rmi $(docker images hyperledger-blockchain-explorer* -q)
 ```
 
-3. Prune networks and volumes
+4. Prune networks and volumes
 
 ```bash
 docker network prune
 docker volume prune
 ```
 
-4. Remove crypto materials
+5. Remove crypto materials
 
 ```bash
 rm -rf app/config/crypto-config/
@@ -83,6 +89,7 @@ The **Hyperledger network** in which I ran this example is composed of :
 - 1 channel _my-channel_ joined by both peer0 from both organizations
 - 1 Go chaincode
 - 4 Kafka nodes and 3 Zookeeper (as recommended)
+- 2 Certification authorities (one per organization)
 
 See _app/config/configtx.yaml_ and _app/config/crypto-config.yaml_ for example configuration and [Hyperledger Fabric documentation](https://hyperledger-fabric.readthedocs.io/en/release-1.2/) for the setup.
 
@@ -91,7 +98,10 @@ See _app/config/configtx.yaml_ and _app/config/crypto-config.yaml_ for example c
 I have build a **custom setup**, that I think is simpler than the mentioned steps (from the [official repository](https://github.com/hyperledger/blockchain-explorer) _readme_ file) which consist of downloading the whole repository and then modify the files.
 
 Instead of downloading the repository locally and doing the modification in the sources,
-I get the repository directly into a **Docker** container and then link local configuration files to it using volumes.
+I get the repository directly from a **Docker** container and then link local configuration files to it using volumes.
+
+I used the **release-3.5** branch.
+You may change the `EXPLORER_BRANCH` argument in the _docker-compose.yml_ file if you want to use a different branch (may requires other modifications).
 
 I have implemented a **Compose** file (_docker-compose.yaml_) that builds the images/containers for the application and the database.
 The containers will be attached to the existing Docker network of our Fabric network.
@@ -99,11 +109,13 @@ The containers will be attached to the existing Docker network of our Fabric net
 :warning: Make sure you use the same Docker network as your existing Hyperledger Fabric network in the _docker-compose.yaml_ file. Mine is `config_mynw`.
 
 The Application will attach to the database once it is ready (I used a `wait.sh` script to wait for the database to be up).
+The initialization scripts are retrieved from the official repository in the **PostGreSQL Dockerfile**.
 
-So all that you need is in the _config_ directory :
+All that you need is in the _config_ directory :
 1. _config.json_ : file representing the network configuration
 2. _crypto-config_ : folder containing the network certificates
 
+So just adapt the _config.json_ file and copy the _crypto-config_ folder from the one generated during your **Fabric** setup.
 You can regenerate the cryptographic materials from the _app/config/configtx.yaml_ and _app/config/crypto-config.yaml_ files if needed.
 
 Then simply run :
@@ -114,7 +126,7 @@ docker-compose up
 
 This will run 2 containers :
 - `hyperledger_explorer_app` : the application
-- `hyperledger_explorer_postgresql` : the database
+- `hyperledger_explorer_postgresql` : the PostGreSQL database
 
 You should be able to reach http://localhost:8092
 

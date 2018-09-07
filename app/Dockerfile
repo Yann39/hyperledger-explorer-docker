@@ -9,6 +9,9 @@ ENV DATABASE_NAME fabricexplorer
 ENV DATABASE_USERNAME hppoc
 ENV DATABASE_PASSWD password
 
+# Get argument from compose file
+ARG EXPLORER_BRANCH
+
 # install required dependencies : python, make, g++, git
 RUN apk add --no-cache --virtual npm-deps python make g++ git && \
     python -m ensurepip && \
@@ -23,8 +26,8 @@ RUN apk add --no-cache findutils
 RUN npm install -g yarn && \
     chmod 777 /usr/local/bin/yarn
 
-# get sources (only master branch and last revision)
-RUN git clone --single-branch -b master --depth 1 https://github.com/hyperledger/blockchain-explorer /opt/explorer
+# get sources (only specified branch and last revision)
+RUN git clone --single-branch -b $EXPLORER_BRANCH --depth 1 https://github.com/hyperledger/blockchain-explorer /opt/explorer
 
 # install NPM dependencies
 RUN cd /opt/explorer && npm install && npm build
