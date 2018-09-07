@@ -17,4 +17,4 @@ RUN wget https://raw.githubusercontent.com/hyperledger/blockchain-explorer/$EXPL
 # Replace :user, :passwd and :dbname variables in the explorerpg.sql script
 RUN sed -i 's/:user/hppoc/g' /docker-entrypoint-initdb.d/explorerpg.sql && \
     sed -i "s/:passwd/'password'/g" /docker-entrypoint-initdb.d/explorerpg.sql && \
-    sed -i 's/:dbname/fabricexplorer/g' /docker-entrypoint-initdb.d/explorerpg.sqls://raw.githubusercontent.com/hyperledger/blockchain-explorer/master/app/persistence/postgreSQL/db/updatepg.sql -O /docker-entrypoint-initdb.d/updatepg.sql
+    sed -i 's/:dbname/fabricexplorer/g' /docker-entrypoint-initdb.d/explorerpg.sql
