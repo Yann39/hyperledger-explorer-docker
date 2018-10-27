@@ -1,6 +1,6 @@
 # Windows 10 64 bits Hyperledger Explorer setup
 
-![Hyperledger Explorer logo](hyperledger-explorer-logo.png?raw=true "Hyperledger Explorer")
+![Hyperledger Explorer logo](doc/hyperledger-explorer-logo.png?raw=true "Hyperledger Explorer")
 
 ## Prerequisites
 
