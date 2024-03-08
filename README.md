@@ -1,5 +1,3 @@
-![Hyperledger Explorer logo](doc/logo-hyperledger-explorer.png?raw=true "Hyperledger Explorer")
-
 # Hyperledger Explorer setup
 
 **Windows 10** 64 bits **Hyperledger Explorer** setup using **Docker**.
@@ -23,7 +21,19 @@
 
 # Prerequisites
 
-<img alt="Hyperledger Fabric logo" src="doc/logo-hyperledger-fabric.png" height="64"/>
+<table>
+  <tr>
+    <td>
+      <img alt="Hyperledger Explorer logo" src="doc/logo-hyperledger-explorer.png" height="64"/>
+    </td>
+    <td>
+      <img alt="Hyperledger Fabric logo" src="doc/logo-hyperledger-fabric.png" height="64"/>
+    </td>
+    <td>
+      <img alt="Docker logo" src="doc/logo-docker.svg" height="64"/>
+    </td>
+  </tr>
+</table>
 
 A running **Hyperledger Fabric** network.
 
@@ -161,7 +171,7 @@ For **Swagger** API endpoint, go to http://localhost:8092/api-docs/
 
 # PostGreSQL database
 
-<img alt="PostGreSql logo" src="doc/logo-postgresql.svg" height="64"/>
+<img alt="PostGreSql logo" src="doc/logo-postgresql.svg" height="72"/>
 
 If you need to enter the **PostGreSQL** database manually, here are some useful commands :
 
@@ -171,7 +181,7 @@ Get into the container :
 winpty docker exec -it hyperledger_explorer_postgresql sh
 ```
 
-Connect to PostGreSQL as postgres user :
+Connect to PostGreSQL as `postgres` user :
 
 ```bash
 su postgres
